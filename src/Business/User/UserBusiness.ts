@@ -107,8 +107,8 @@ export default class UserBusiness {
         const {id, name, telephone}  = input
 
         //ID é obrigatório para encontrar usuário
-        if(!id){
-            throw new Error("Você deve informar um id para que um usuário seja encontrado!")
+        if(!id || !name || !telephone){
+            throw new Error("Você deve informar todas as informações para atualizar um usuário!")
         }
         
         //Verificar se existe um usuário com o id que foi passado
@@ -116,16 +116,6 @@ export default class UserBusiness {
 
         if(!verificaUser){
             throw new Error("Esse usuário não existe!")
-        }
-
-        //Caso a pessoa queira atualizar apenas seu nome
-        if(name){
-            await this.userData.updateUserByName(id, name)
-        }
-
-        //Caso a pessoa queira atualizar apenas seu telefone
-        if(telephone){
-            await this.userData.updateUserByTelephone(id, telephone)
         }
 
         //Caso a pessoa queira atualizar nome, email e telefone
