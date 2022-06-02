@@ -91,17 +91,31 @@ export default class UserData extends BaseDatabase implements UserRepository {
     }
 
     //Query para atualizar nome, email e telefone de usuário
-    updateUserByNameTelephone = async (id:string, name:string, telephone: string) => {
+    updateUserByNameTelephone = async (id:string, name:string, telephone: string, updatedAt: string) => {
         try {
             const queryResult = await BaseDatabase.connection.raw(`
                 UPDATE ${this.TABLE_NAME}
-                SET name = '${name}', telephone = '${telephone}'
+                SET name = '${name}', telephone = '${telephone}', updated_at = '${updatedAt}'
                 WHERE id = '${id}'
             `)
             
             return queryResult[0]
         } catch (error:any) {
             throw new Error("Erro ao atualizar por nome e sobrenome!")
+        }
+    }
+
+    //Query para deletar usuário
+    deleteById = async (id: string ) => {
+       
+        try {
+            await BaseDatabase
+            .connection(this.TABLE_NAME)
+            .delete()
+            .where({"id": id})
+        
+        } catch (error:any) {
+            throw new Error("Erro ao deletar usuário no banco de dados!")
         }
     }
 }

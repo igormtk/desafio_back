@@ -118,8 +118,23 @@ export default class UserBusiness {
             throw new Error("Esse usuário não existe!")
         }
 
-        //Caso a pessoa queira atualizar nome, email e telefone
-        await this.userData.updateUserByNameTelephone(id, name, telephone)
+        //Nova data de atualização
+        const updatedAt = new Date().toString()
+
+        //Atualização do nome, telefone e data de atualização
+        await this.userData.updateUserByNameTelephone(id, name, telephone, updatedAt)
+    }
+
+    //Lógica para a deletar um usuário através de Id
+    deleteUser = async(input: string) => {
+        //Informações a serem recebidas da camada controller
+        const id = input
+
+        if(!id){
+            throw new Error("Insira um id!")
+        }
+
+        await this.userData.deleteById(id)
     }
 
 }

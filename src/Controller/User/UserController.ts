@@ -58,14 +58,32 @@ export default class UserController {
     }
 
     updateUser = async (req: Request, res: Response) => {
-        //Recebimento do id para buscar apenas 1 usuário, caso não passe um id, retornará todos
+        //Recebimento das informações necessárias para atualizar usuário
         const input = req.body
 
         //Em caso de informações corretas:
         try {
             //Executar a lógica do getUsers na camada Business
-            const user = await this.userBusiness.updateUser(input)
+            await this.userBusiness.updateUser(input)
             res.send({message: "Usuário atualizado com sucesso!"})
+        
+        //Em caso de informações incorretas:
+        } catch (error:any) {
+            res.statusCode = 400
+            let message = error.sqlMessage || error.message
+            res.send({ message })
+        }
+    }
+
+    deleteUser = async (req: Request, res: Response) => {
+        //Recebimento do id para deletar apenas 1 usuário
+        const input = req.body.id
+
+        //Em caso de informações corretas:
+        try {
+            //Executar a lógica do getUsers na camada Business
+            await this.userBusiness.deleteUser(input)
+            res.send({message: "Usuário deletado com sucesso!"})
         
         //Em caso de informações incorretas:
         } catch (error:any) {

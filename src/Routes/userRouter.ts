@@ -7,4 +7,5 @@ const userController = new UserController();
 
 userRouter.post("/create", userController.createUser)
 userRouter.put("/update", userController.updateUser)
+userRouter.delete("/delete", userController.deleteUser)
 userRouter.get("/", userController.getUsers)
