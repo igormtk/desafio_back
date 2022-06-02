@@ -26,6 +26,7 @@ export default class UserController {
         
         //Em caso de informações corretas:
         try {
+            //Executar a lógica do createUser na camada Business
             await this.userBusiness.createUser(input)
             res.send({message: "Usuário Criado com sucesso!"})
         
@@ -37,13 +38,18 @@ export default class UserController {
         }
     }
 
+    //Recebimento das requisições para a receber 1 ou todos os usuários
     getUsers = async (req: Request, res: Response) => {
+        //Recebimento do id para buscar apenas 1 usuário, caso não passe um id, retornará todos
         const input = req.params.id
 
+        //Em caso de informações corretas:
         try {
+            //Executar a lógica do getUsers na camada Business
             const user = await this.userBusiness.getUsers(input)
             res.send({user})
-
+        
+        //Em caso de informações incorretas:
         } catch (error:any) {
             res.statusCode = 400
             let message = error.sqlMessage || error.message
