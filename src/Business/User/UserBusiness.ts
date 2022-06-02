@@ -36,11 +36,6 @@ export default class UserBusiness {
             throw new Error("O cpf não possui o número de dígitos correto!")
         }
 
-        //Criptografia do cpf, email e telefone
-        // const hashedCpf = await this.hashManager.hash(cpf)
-        // const hashedEmail = await this.hashManager.hash(email)
-        // const hashedTelephone = await this.hashManager.hash(telephone)
-
         //Consulta das querys para encontrar usuários com os mesmos dados sensiveis(name, cpf, email, telephone)
         const verifyCpf = await this.userData.getByCpf(cpf)
         const verifyEmail = await this.userData.getByEmail(email)
@@ -80,6 +75,26 @@ export default class UserBusiness {
         )
 
         await this.userData.insertUser(newUser)
+    }
+
+    getUsers = async (input: string) => {
+        //Informações a serem recebidas da camada controller
+        const inputParams = input
+
+        //Caso não seja passado um params, retornar todos os usuários
+        if(!inputParams){
+            const result = await this.userData.getAllUsers()
+            return result
+        } else {
+            //Caso um params seja colocado, retornar o usuário em questão
+            const result = await this.userData.getById(inputParams)
+
+            if(!result){
+                throw new Error("Não existe um usuário com esse id")
+            }
+
+            return result
+        }
     }
 
 }

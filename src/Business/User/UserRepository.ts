@@ -6,4 +6,6 @@ export interface UserRepository {
     getByCpf(cpf: string):Promise<User>
     getByEmail(email: string):Promise<User>
     getByTelephone(telephone: string):Promise<User>
+    getById(id: string):Promise<User>
+    getAllUsers():Promise<User[]>
 }

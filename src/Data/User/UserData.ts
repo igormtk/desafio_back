@@ -55,11 +55,38 @@ export default class UserData extends BaseDatabase implements UserRepository {
             const queryResult = await BaseDatabase
             .connection(this.TABLE_NAME)
             .select()
-            .where({telephone})
+            .where("telephone", telephone)
             
             return queryResult[0]
         } catch (error:any) {
             throw new Error("Erro ao buscar telefone no banco de dados!")
+        }
+    } 
+
+    //Query para procurar usuário por "telephone"
+    getById = async (id: string) => {
+        try {
+            const queryResult = await BaseDatabase
+            .connection(this.TABLE_NAME)
+            .select()
+            .where({id})
+            
+            return queryResult[0]
+        } catch (error:any) {
+            throw new Error("Erro ao buscar usuário por ID!")
+        }
+    } 
+
+    //Query para retornar todos os usuários
+    getAllUsers = async () => {
+        try {
+            const queryResult = await BaseDatabase
+            .connection(this.TABLE_NAME)
+            .select()
+            
+            return queryResult
+        } catch (error:any) {
+            throw new Error("Erro ao buscar os usuários!")
         }
     } 
 }

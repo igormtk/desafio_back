@@ -6,3 +6,4 @@ export const userRouter = express.Router();
 const userController = new UserController();
 
 userRouter.post("/create", userController.createUser)
+userRouter.get("/", userController.getUsers)

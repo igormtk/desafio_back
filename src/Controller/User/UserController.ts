@@ -36,4 +36,18 @@ export default class UserController {
             res.send({ message })
         }
     }
+
+    getUsers = async (req: Request, res: Response) => {
+        const input = req.params.id
+
+        try {
+            const user = await this.userBusiness.getUsers(input)
+            res.send({user})
+
+        } catch (error:any) {
+            res.statusCode = 400
+            let message = error.sqlMessage || error.message
+            res.send({ message })
+        }
+    }
 }
