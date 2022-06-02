@@ -36,22 +36,35 @@ export default class UserBusiness {
         const hashedTelephone = await this.hashManager.hash(telephone)
 
         //Consulta das querys para encontrar usuários com os dados sensiveis(name, cpf, email, telephone) iguais aos dados recebidos
-        const verifyCpf = await this.userData.getByCpf(cpf)
-        const verifyEmail = await this.userData.getByEmail(email)
-        const verifyTelephone = await this.userData.getByTelephone(telephone)
+        const verifyCpf = await this.userData.getByCpf(hashedCpf)
+        const verifyEmail = await this.userData.getByEmail(hashedEmail)
+        const verifyTelephone = await this.userData.getByTelephone(hashedTelephone)
 
         //Verificação de cpf, email e telefone para que não haja informações sensiveis duplicadas
+        //Primeiro comparando hash, se a comparação for true, existem duplicações
         //Case esteja duplicada, informar qual informação está duplicada
         if(verifyCpf){
-            throw new Error("Já existe um usuário com esse Cpf!")
+            const compareHash = await this.hashManager.compareHash(verifyCpf.getCpf(), hashedCpf)
+            
+            if(compareHash === true){
+                throw new Error("Já existe um usuário com esse Cpf!")
+            }
         }
 
         if(verifyEmail){
-            throw new Error("Já existe um usuário com esse Email!")
+            const compareHash = await this.hashManager.compareHash(verifyEmail.getEmail(), hashedEmail)
+
+            if(compareHash === true){
+                throw new Error("Já existe um usuário com esse Email!")
+            }
         }
 
         if(verifyTelephone){
-            throw new Error("Já existe um usuário com esse telefone!")
+            const compareHash = await this.hashManager.compareHash(verifyTelephone.getTelephone(), hashedTelephone)
+            
+            if(compareHash === true){
+                throw new Error("Já existe um usuário com esse telefone!")
+            }
         }
 
         //Criando id com Id Generator

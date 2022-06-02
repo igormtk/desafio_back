@@ -1,5 +1,4 @@
 export class User {
-
     constructor(
         private id: string,
         private name: string,
@@ -45,7 +44,7 @@ export class User {
         return this.updated_at
     }
 
-    static toWalkModel(data:any):User{
+    static toUserModel(data:any):User{
         return new User(
             data.id, 
             data.name,
