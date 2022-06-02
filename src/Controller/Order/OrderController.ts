@@ -12,7 +12,7 @@ export default class OrderController {
     }
 
     //Recebimento das requisições para a criação de um usuário
-    createUser = async (req: Request, res: Response) => {
+    createOrder = async (req: Request, res: Response) => {
         //Recebimento das informações
         const {name, cpf, email, telephone} = req.body
 
