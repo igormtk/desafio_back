@@ -28,10 +28,6 @@ export default class UserBusiness {
             throw new Error("Um dos campos não foi preenchido!")
         }
 
-        if(typeof name !== "string" || typeof cpf !== "string" || typeof email !== "string" || typeof telephone !== "string"){
-            throw new Error("Um dos campos foi preenchido incorretamente!")
-        }
-
         if(cpf.length !== 11){
             throw new Error("O cpf não possui o número de dígitos correto!")
         }

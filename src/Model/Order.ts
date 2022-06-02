@@ -1,5 +1,5 @@
 //Criação da classe Order
-export class User {
+export class Order {
     constructor(
         private id: string,
         private user_id: string,
@@ -51,8 +51,8 @@ export class User {
         return this.updated_at
     }
 
-    static toUserModel(data:any):User{
-        return new User(
+    static toUserModel(data:any):Order{
+        return new Order(
             data.id, 
             data.user_id,
             data.description, 
@@ -63,4 +63,20 @@ export class User {
             data.updated_at
         )
     }
+}
+
+export type CreateOrderInputDTO = {
+    user_id: string, 
+    description: string,
+    quantity: number, 
+    price: number,
+    value: number
+}
+
+export type UpdateOrderInputDTO = {
+    user_id: string, 
+    description: string,
+    quantity: number, 
+    price: number,
+    value: number
 }

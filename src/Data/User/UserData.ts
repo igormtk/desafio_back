@@ -13,7 +13,6 @@ export default class UserData extends BaseDatabase implements UserRepository {
             .connection(this.TABLE_NAME)
             .insert(user)
             
-            console.log(user)
             return user
         } catch (error:any) {
             throw new Error("Erro ao criar usuário no banco de dados!")
@@ -28,7 +27,6 @@ export default class UserData extends BaseDatabase implements UserRepository {
             .select()
             .where("cpf", cpf)
             
-            console.log(queryResult)
             return queryResult[0]
         } catch (error:any) {
             throw new Error("Erro ao buscar cpf no banco de dados!")
