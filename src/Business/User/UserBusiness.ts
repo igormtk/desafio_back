@@ -17,17 +17,23 @@ export default class UserBusiness {
         this.userData = userDataImplementation
     }
 
+    //Lógica para a criação de um usuário
     createUser = async(input: CreateUserInputDTO) => {
         //Informações a serem recebidas da camada controller
         const {name, cpf, email, telephone} = input
 
         //Verificação das informações recebidas
+        //Para simplificar o projeto não formatarei o telefone nem o email, porém existe a necessidade
         if(!name || !cpf || !email || !telephone){
             throw new Error("Um dos campos não foi preenchido!")
         }
 
         if(typeof name !== "string" || typeof cpf !== "string" || typeof email !== "string" || typeof telephone !== "string"){
             throw new Error("Um dos campos foi preenchido incorretamente!")
+        }
+
+        if(cpf.length !== 11){
+            throw new Error("O cpf não possui o número de dígitos correto!")
         }
 
         //Criptografia do cpf, email e telefone
@@ -74,8 +80,6 @@ export default class UserBusiness {
         )
 
         await this.userData.insertUser(newUser)
-     
-        
     }
 
 }
