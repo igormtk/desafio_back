@@ -1,3 +1,4 @@
+//Criação da classe User
 export class User {
     constructor(
         private id: string,
@@ -57,6 +58,7 @@ export class User {
     }
 }
 
+//Types para restringir as informações passadas pelo usuário
 export type CreateUserInputDTO = {
     name: string, 
     cpf: string,

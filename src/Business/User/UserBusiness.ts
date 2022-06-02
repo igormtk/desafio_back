@@ -121,7 +121,7 @@ export default class UserBusiness {
         //Nova data de atualização
         const updatedAt = new Date().toString()
 
-        //Atualização do nome, telefone e data de atualização
+        //Atualização do nome, telefone e data de atualização no banco de dados
         await this.userData.updateUserByNameTelephone(id, name, telephone, updatedAt)
     }
 
@@ -130,10 +130,12 @@ export default class UserBusiness {
         //Informações a serem recebidas da camada controller
         const id = input
 
+        //Verifica se foi passado um id
         if(!id){
             throw new Error("Insira um id!")
         }
 
+        //Deleta o usuário no banco de dados
         await this.userData.deleteById(id)
     }
 
