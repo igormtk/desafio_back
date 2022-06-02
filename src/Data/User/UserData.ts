@@ -23,11 +23,11 @@ export default class UserData extends BaseDatabase implements UserRepository {
     //Query para procurar usuário por "cpf"
     getByCpf = async (cpf: string) => {
         try {
-            const queryResult: User[] = await BaseDatabase
+            const queryResult = await BaseDatabase
             .connection(this.TABLE_NAME)
             .select()
-            .where({cpf})
-
+            .where("cpf", cpf)
+            
             console.log(queryResult)
             return queryResult[0]
         } catch (error:any) {
@@ -38,11 +38,11 @@ export default class UserData extends BaseDatabase implements UserRepository {
     //Query para procurar usuário por "email"
     getByEmail = async (email: string) => {
         try {
-            const queryResult: User[] = await BaseDatabase
+            const queryResult = await BaseDatabase
             .connection(this.TABLE_NAME)
             .select()
-            .where({email})
-            
+            .where("email", email)
+         
             return queryResult[0]
         } catch (error:any) {
             throw new Error("Erro ao buscar e-mail no banco de dados!")
@@ -52,7 +52,7 @@ export default class UserData extends BaseDatabase implements UserRepository {
     //Query para procurar usuário por "telephone"
     getByTelephone = async (telephone: string) => {
         try {
-            const queryResult: User[] = await BaseDatabase
+            const queryResult = await BaseDatabase
             .connection(this.TABLE_NAME)
             .select()
             .where({telephone})
