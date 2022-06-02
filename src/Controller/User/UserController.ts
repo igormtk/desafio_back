@@ -28,7 +28,7 @@ export default class UserController {
         try {
             //Executar a lógica do createUser na camada Business
             await this.userBusiness.createUser(input)
-            res.send({message: "Usuário Criado com sucesso!"})
+            res.send({message: "Usuário criado com sucesso!"})
         
         //Em caso de informações incorretas:
         } catch (error:any) {
@@ -48,6 +48,24 @@ export default class UserController {
             //Executar a lógica do getUsers na camada Business
             const user = await this.userBusiness.getUsers(input)
             res.send({user})
+        
+        //Em caso de informações incorretas:
+        } catch (error:any) {
+            res.statusCode = 400
+            let message = error.sqlMessage || error.message
+            res.send({ message })
+        }
+    }
+
+    updateUser = async (req: Request, res: Response) => {
+        //Recebimento do id para buscar apenas 1 usuário, caso não passe um id, retornará todos
+        const input = req.body
+
+        //Em caso de informações corretas:
+        try {
+            //Executar a lógica do getUsers na camada Business
+            const user = await this.userBusiness.updateUser(input)
+            res.send({message: "Usuário atualizado com sucesso!"})
         
         //Em caso de informações incorretas:
         } catch (error:any) {

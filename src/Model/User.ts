@@ -63,3 +63,10 @@ export type CreateUserInputDTO = {
     email: string, 
     telephone: string
 }
+
+export type UpdateUserInputDTO = {
+    id: string,
+    name: string, 
+    email: string, 
+    telephone: string
+}

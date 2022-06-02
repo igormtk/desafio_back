@@ -1,4 +1,4 @@
-import { CreateUserInputDTO, User } from "../../Model/User";
+import { CreateUserInputDTO, UpdateUserInputDTO, User } from "../../Model/User";
 import { HashManager } from "../../Services/HashManager";
 import { IdGenerator } from "../../Services/IdGenerator";
 import { UserRepository } from "./UserRepository";
@@ -77,6 +77,7 @@ export default class UserBusiness {
         await this.userData.insertUser(newUser)
     }
 
+    //Lógica para a retornar 1 ou mais usuários
     getUsers = async (input: string) => {
         //Informações a serem recebidas da camada controller
         const inputParams = input
@@ -95,6 +96,40 @@ export default class UserBusiness {
 
             return result
         }
+    }
+
+    //Lógica para a atualização de 1 usuário
+    //Inserindo um type para restringir as infos que o usuário deve inserir
+    updateUser = async(input: UpdateUserInputDTO) => {
+        //Informações a serem recebidas da camada controller
+        //Não coloquei cpf e email porque o cpf não pode ser mudado 
+        //e dificilmente um usuário pode mudar seu e-mail
+        const {id, name, telephone}  = input
+
+        //ID é obrigatório para encontrar usuário
+        if(!id){
+            throw new Error("Você deve informar um id para que um usuário seja encontrado!")
+        }
+        
+        //Verificar se existe um usuário com o id que foi passado
+        const verificaUser = await this.userData.getById(id)
+
+        if(!verificaUser){
+            throw new Error("Esse usuário não existe!")
+        }
+
+        //Caso a pessoa queira atualizar apenas seu nome
+        if(name){
+            await this.userData.updateUserByName(id, name)
+        }
+
+        //Caso a pessoa queira atualizar apenas seu telefone
+        if(telephone){
+            await this.userData.updateUserByTelephone(id, telephone)
+        }
+
+        //Caso a pessoa queira atualizar nome, email e telefone
+        await this.userData.updateUserByNameTelephone(id, name, telephone)
     }
 
 }

@@ -88,5 +88,50 @@ export default class UserData extends BaseDatabase implements UserRepository {
         } catch (error:any) {
             throw new Error("Erro ao buscar os usuários!")
         }
-    } 
+    }
+
+    //Query para atualizar email e telefone de usuário
+    updateUserByTelephone = async (id:string, telephone: string) => {
+        try {
+            const queryResult = await BaseDatabase.connection.raw(`
+                UPDATE ${this.TABLE_NAME}
+                SET telephone = '${telephone}'
+                WHERE id = '${id}'
+            `)
+            
+            return queryResult[0]
+        } catch (error:any) {
+            throw new Error("Erro ao buscar os usuários!")
+        }
+    }
+
+    //Query para atualizar name e email
+    updateUserByName = async (id:string, name:string) => {
+        try {
+            const queryResult = await BaseDatabase.connection.raw(`
+                UPDATE ${this.TABLE_NAME}
+                SET name = '${name}'
+                WHERE id = '${id}'
+            `)
+            
+            return queryResult[0]
+        } catch (error:any) {
+            throw new Error("Erro ao buscar os usuários!")
+        }
+    }
+
+    //Query para atualizar nome, email e telefone de usuário
+    updateUserByNameTelephone = async (id:string, name:string, telephone: string) => {
+        try {
+            const queryResult = await BaseDatabase.connection.raw(`
+                UPDATE ${this.TABLE_NAME}
+                SET name = '${name}', telephone = '${telephone}'
+                WHERE id = '${id}'
+            `)
+            
+            return queryResult[0]
+        } catch (error:any) {
+            throw new Error("Erro ao buscar os usuários!")
+        }
+    }
 }

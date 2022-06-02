@@ -8,4 +8,7 @@ export interface UserRepository {
     getByTelephone(telephone: string):Promise<User>
     getById(id: string):Promise<User>
     getAllUsers():Promise<User[]>
+    updateUserByTelephone(id:string, telephone: string):Promise<void>
+    updateUserByName(id:string, name:string):Promise<void>
+    updateUserByNameTelephone(id:string, name:string, telephone: string):Promise<void>
 }
