@@ -1,5 +1,4 @@
 import { CreateOrderInputDTO, Order, UpdateOrderInputDTO } from "../../Model/Order";
-import { HashManager } from "../../Services/HashManager";
 import { IdGenerator } from "../../Services/IdGenerator";
 import { OrderRepository } from "./OrderRepository";
 
@@ -7,13 +6,11 @@ import { OrderRepository } from "./OrderRepository";
 export default class OrderBusiness {
     private idGenerator: IdGenerator;
     private orderData: OrderRepository;
-    private hashManager: HashManager;
 
     constructor(
         orderDataImplementation: OrderRepository
     ){  
         this.idGenerator = new IdGenerator
-        this.hashManager = new HashManager()
         this.orderData = orderDataImplementation
     }
 

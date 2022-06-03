@@ -1,46 +1,56 @@
-# Jogos Olímpicos - Estante Virtual
-- Case de back-End
+# DESAFIO BACK-END
 
-Esse projeto consiste em construir uma API REST em Ruby para o COB (Comitê Olímico Brasileiro), que será responsável por marcar e dizer os vencedores das seguintes modalidades:
+Neste desafio foi criado uma aplicação básica nos moldes de um microserviço.
 
-- 100m rasos: Menor tempo vence
-- Lançamento de Dardo: Maior distância vence
+Ela apresenta as seguintes funcionalidades para as entidades usuários e pedidos:
+
+- Rotas de listagem, exibição, criação, alteração e exclusão de usuários (CRUD);
+
+Uma tabela de usuários que deverá conter os campos:
+- id
+- nome
+- cpf
+- email
+- telefone
+- created_at
+- updated_at
+
+Uma tabela de pedidos que deverá conter os campos:
+- id
+- usuario_id
+- descricao
+- quantidade
+- preco
+- valor
+- created_at
+- updated_at
 
 - Documentação API:
 Acesse o postman aqui 👉 https://documenter.getpostman.com/view/18386394/Uyr4L1JG
 
-
-## Desenvolvedor 
+## Desenvolvedor
 
 - Igor Eiiji Avelar Matsuoka
 
-### Tecnologias utilizadas: 
+## Tecnologias utilizadas: 
 - Typescript
-- Node
+- Node.JS
 - SQL
 - MySQL
 - Express
 - Cors
 - Dotenv
 - Knex
-- React
-- Axios
 - UUID
 - json
 - jest
 
-### Funcionalidades:
-- Cadastrar atleta em uma determinada competição (100m ou dardo), inserindo:
-    - Nome da competição (se o nome não existir irá ser criada uma nova, se a competição já tiver sido finalizada, não será possível a inserção do atleta), 
-    - Nome do atleta,
-    - O valor da sua corrida/arremesso,
-    - unidade em que serão feitas as medidas (m = metros, s = segundos)
+## Funcionalidades:
+#### Usuários:
 
-- Finalizar a competição a partir do nome da competição;
+#### Pedidos:
 
-- Mostrar a colocação dos atletas desde o primeiro colocado ao último a partir do nome da competição.
-
-### Testes para os 100m:
+## Testes para os 100m:
 - Erro ao passar algum input vazio na hora de cadastrar
 - Erro ao passar unidade diferente de "s" na hora de cadastrar
 - Erro ao tentar cadastrar em uma competição finalizada
@@ -51,7 +61,7 @@ Acesse o postman aqui 👉 https://documenter.getpostman.com/view/18386394/Uyr4L
 - Teste ao passar alguma competição inexistente na hora pegar o ranking da competição
 - Teste de sucesso ao pegar ranking da corrida
 
-### Testes para o arremesso de dardo:
+## Testes para o arremesso de dardo:
 - Erro ao passar algum input vazio na hora de cadastrar
 - Erro ao passar unidade diferente de "m" na hora de cadastrar
 - Erro ao tentar cadastrar em uma competição finalizada

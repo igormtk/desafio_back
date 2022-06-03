@@ -1,5 +1,5 @@
 import { CreateUserInputDTO, UpdateUserInputDTO, User } from "../../Model/User";
-import { HashManager } from "../../Services/HashManager";
+import { Crypto } from "../../Services/Crypto";
 import { IdGenerator } from "../../Services/IdGenerator";
 import { UserRepository } from "./UserRepository";
 
@@ -7,13 +7,13 @@ import { UserRepository } from "./UserRepository";
 export default class UserBusiness {
     private idGenerator: IdGenerator;
     private userData: UserRepository;
-    private hashManager: HashManager;
+    private crypto: Crypto;
 
     constructor(
         userDataImplementation: UserRepository
     ){  
         this.idGenerator = new IdGenerator
-        this.hashManager = new HashManager()
+        this.crypto = new Crypto()
         this.userData = userDataImplementation
     }
 
@@ -32,10 +32,15 @@ export default class UserBusiness {
             throw new Error("O cpf não possui o número de dígitos correto!")
         }
 
+        //Criptografando as informações sensíveis
+        const cryptedCpf = await this.crypto.crypt(cpf)
+        const cryptedEmail = await this.crypto.crypt(email)
+        const cryptedTelephone = await this.crypto.crypt(telephone)
+
         //Consulta das querys para encontrar usuários com os mesmos dados sensiveis(name, cpf, email, telephone)
-        const verifyCpf = await this.userData.getByCpf(cpf)
-        const verifyEmail = await this.userData.getByEmail(email)
-        const verifyTelephone = await this.userData.getByTelephone(telephone)
+        const verifyCpf = await this.userData.getByCpf(cryptedCpf)
+        const verifyEmail = await this.userData.getByEmail(cryptedEmail)
+        const verifyTelephone = await this.userData.getByTelephone(cryptedTelephone)
 
         if(verifyCpf){
             throw new Error("Já existe um usuário com esse CPF!")
@@ -63,9 +68,9 @@ export default class UserBusiness {
         const newUser = new User(
             id,
             name,
-            cpf,
-            email,
-            telephone,
+            cryptedCpf,
+            cryptedEmail,
+            cryptedTelephone,
             created_at,
             updated_at
         )
