@@ -3,6 +3,7 @@ import { AddressInfo } from "net";
 import dotenv from "dotenv";
 import cors from 'cors';
 
+//Código para criar o servidor
 dotenv.config();
 
 export const app = express();

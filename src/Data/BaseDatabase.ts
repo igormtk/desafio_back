@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 dotenv.config();
 
 export default abstract class BaseDatabase {
+  // estabelecer a conexão com o banco no index.ts
   protected static connection = knex({
     client: "mysql",
     connection: {
