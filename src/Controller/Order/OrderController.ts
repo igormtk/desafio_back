@@ -78,21 +78,21 @@ export default class OrderController {
         }
     }
 
-    // deleteUser = async (req: Request, res: Response) => {
-    //     //Recebimento do id para deletar apenas 1 usuário
-    //     const input = req.body.id
+    deleteOrder = async (req: Request, res: Response) => {
+        //Recebimento do id para deletar apenas 1 usuário
+        const input = req.body.id
 
-    //     //Em caso de informações corretas:
-    //     try {
-    //         //Executar a lógica do getUsers na camada Business
-    //         await this.userBusiness.deleteUser(input)
-    //         res.send({message: "Usuário deletado com sucesso!"})
+        //Em caso de informações corretas:
+        try {
+            //Executar a lógica do getUsers na camada Business
+            await this.orderBusiness.deleteOrder(input)
+            res.send({message: "Pedido deletado com sucesso!"})
         
-    //     //Em caso de informações incorretas:
-    //     } catch (error:any) {
-    //         res.statusCode = 400
-    //         let message = error.sqlMessage || error.message
-    //         res.send({ message })
-    //     }
-    // }
+        //Em caso de informações incorretas:
+        } catch (error:any) {
+            res.statusCode = 400
+            let message = error.sqlMessage || error.message
+            res.send({ message })
+        }
+    }
 }

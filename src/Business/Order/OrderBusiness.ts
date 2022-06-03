@@ -110,18 +110,18 @@ export default class OrderBusiness {
         await this.orderData.updateOrderByUserIdDescriptionQuantityPrice(id, user_id, description, quantity, price, updatedAt)
     }
 
-    // //Lógica para a deletar um usuário através de Id
-    // deleteUser = async(input: string) => {
-    //     //Informações a serem recebidas da camada controller
-    //     const id = input
+    // //Lógica para a deletar um pedido através de Id
+    deleteOrder = async(input: string) => {
+        //Informações a serem recebidas da camada controller
+        const id = input
 
-    //     //Verifica se foi passado um id
-    //     if(!id){
-    //         throw new Error("Insira um id!")
-    //     }
+        //Verifica se foi passado um id
+        if(!id){
+            throw new Error("Insira um id!")
+        }
 
-    //     //Deleta o usuário no banco de dados
-    //     await this.userData.deleteById(id)
-    // }
+        //Deleta o usuário no banco de dados
+        await this.orderData.deleteById(id)
+    }
 
 }

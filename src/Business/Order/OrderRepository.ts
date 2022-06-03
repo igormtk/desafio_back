@@ -7,5 +7,5 @@ export interface OrderRepository {
     getOrderById(id: string):Promise<Order>
     getAllOrders():Promise<Order[]>
     updateOrderByUserIdDescriptionQuantityPrice(id: string, user_id: string, description: string, quantity: number, price: number, updatedAt: string):Promise<void>
-    // deleteById(email: string):Promise<void>
+    deleteById(id: string):Promise<void>
 }

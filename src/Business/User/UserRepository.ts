@@ -9,5 +9,5 @@ export interface UserRepository {
     getById(id: string):Promise<User>
     getAllUsers():Promise<User[]>
     updateUserByNameTelephone(id:string, name:string, telephone: string, updatedAt: string):Promise<void>
-    deleteById(email: string):Promise<void>
+    deleteById(id: string):Promise<void>
 }

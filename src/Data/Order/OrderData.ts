@@ -85,17 +85,17 @@ export default class OrderData extends BaseDatabase implements OrderRepository {
         }
     }
 
-    // //Query para deletar usuário
-    // deleteById = async (id: string ) => {
+    // //Query para deletar pedido
+    deleteById = async (id: string ) => {
        
-    //     try {
-    //         await BaseDatabase
-    //         .connection(this.TABLE_NAME)
-    //         .delete()
-    //         .where({"id": id})
+        try {
+            await BaseDatabase
+            .connection(this.TABLE_NAME)
+            .delete()
+            .where({"id": id})
         
-    //     } catch (error:any) {
-    //         throw new Error("Erro ao deletar usuário no banco de dados!")
-    //     }
-    // }
+        } catch (error:any) {
+            throw new Error("Erro ao deletar pedido no banco de dados!")
+        }
+    }
 }
