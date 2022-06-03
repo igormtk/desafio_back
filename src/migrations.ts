@@ -64,7 +64,7 @@ export const createTables = async (): Promise<boolean> => {
         `);
 
         console.log("Tabelas criadas e populadas com sucesso!");
-        // closeConnection()
+        closeConnection()
         return true;
     } catch (e) {
         const error = e as Error;
