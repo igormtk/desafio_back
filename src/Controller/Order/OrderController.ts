@@ -39,24 +39,25 @@ export default class OrderController {
         }
     }
 
-    // //Recebimento das requisições para a receber 1 ou todos os usuários
-    // getUsers = async (req: Request, res: Response) => {
-    //     //Recebimento do id para buscar apenas 1 usuário, caso não passe um id, retornará todos
-    //     const input = req.params.id
+    //Recebimento das requisições para a receber 1 ou todos os pedidos
+    getOrders = async (req: Request, res: Response) => {
+        //Recebimento do id para buscar apenas 1 pedido, caso não passe um id, retornará todos
+        //Como microsserviço seria interessante fazer um get para pedidos através do id do usuário. Para efeitos de simplificação, não irei fazer 
+        const input = req.body.id
 
-    //     //Em caso de informações corretas:
-    //     try {
-    //         //Executar a lógica do getUsers na camada Business
-    //         const user = await this.userBusiness.getUsers(input)
-    //         res.send({user})
+        //Em caso de informações corretas:
+        try {
+            //Executar a lógica do getUsers na camada Business
+            const order = await this.orderBusiness.getOrders(input)
+            res.send({order})
         
-    //     //Em caso de informações incorretas:
-    //     } catch (error:any) {
-    //         res.statusCode = 400
-    //         let message = error.sqlMessage || error.message
-    //         res.send({ message })
-    //     }
-    // }
+        //Em caso de informações incorretas:
+        } catch (error:any) {
+            res.statusCode = 400
+            let message = error.sqlMessage || error.message
+            res.send({ message })
+        }
+    }
 
     // updateUser = async (req: Request, res: Response) => {
     //     //Recebimento das informações necessárias para atualizar usuário

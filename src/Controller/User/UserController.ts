@@ -41,7 +41,7 @@ export default class UserController {
     //Recebimento das requisições para a receber 1 ou todos os usuários
     getUsers = async (req: Request, res: Response) => {
         //Recebimento do id para buscar apenas 1 usuário, caso não passe um id, retornará todos
-        const input = req.params.id
+        const input = req.body.id
 
         //Em caso de informações corretas:
         try {

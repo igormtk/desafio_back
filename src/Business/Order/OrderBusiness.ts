@@ -29,9 +29,9 @@ export default class OrderBusiness {
         }
 
         //verificar se existe usuário com o id passado
-        const verifyUser = await this.orderData.getById(user_id)
+        const verifyUser = await this.orderData.getUserById(user_id)
 
-        if(!verifyUser){
+        if(verifyUser === undefined){
             throw new Error("Esse usuário não existe!")
         }
 
@@ -62,26 +62,28 @@ export default class OrderBusiness {
         await this.orderData.insertOrder(newOrder)
     }
 
-    // //Lógica para a retornar 1 ou mais usuários
-    // getUsers = async (input: string) => {
-    //     //Informações a serem recebidas da camada controller
-    //     const inputParams = input
+    //Lógica para a retornar 1 pedido ou todos
+    getOrders = async (input: string) => {
+        //Informações a serem recebidas da camada controller
+        const id = input
+        console.log(input)
 
-    //     //Caso não seja passado um params, retornar todos os usuários
-    //     if(!inputParams){
-    //         const result = await this.userData.getAllUsers()
-    //         return result
-    //     } else {
-    //         //Caso um params seja colocado, retornar o usuário em questão
-    //         const result = await this.userData.getById(inputParams)
+        //Caso um params seja colocado, retornar o pedido em questão
+        if(id) {
+            const result = await this.orderData.getOrderById(id)
 
-    //         if(!result){
-    //             throw new Error("Não existe um usuário com esse id")
-    //         }
+            if(!result){
+                throw new Error("Não existe um usuário com esse id")
+            }
 
-    //         return result
-    //     }
-    // }
+            return result 
+        }
+
+        //Caso não seja passado um params, retornar todos os pedidos
+        const result = await this.orderData.getAllOrders()
+
+        return result
+    }
 
     // //Lógica para a atualização de 1 usuário
     // //Inserindo um type para restringir as infos que o usuário deve inserir

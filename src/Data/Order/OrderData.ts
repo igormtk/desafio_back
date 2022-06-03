@@ -19,8 +19,8 @@ export default class OrderData extends BaseDatabase implements OrderRepository {
         }
     }
 
-    //Query para procurar usuário por "id"
-    getById = async (id: string) => {
+    //Query para procurar usuário por "id", para identificar se o usuário existe
+    getUserById = async (id: string) => {
         try {
             const queryResult = await BaseDatabase.connection.raw(`
             SELECT Users.id, Users.name, Users.cpf, Users.email, Users.telephone, Users.created_at, Users.updated_at 
@@ -28,27 +28,25 @@ export default class OrderData extends BaseDatabase implements OrderRepository {
             RIGHT JOIN Users on ${this.TABLE_NAME}.user_id = Users.id 
             WHERE Users.id = '${id}';
             `)
-            
-            return queryResult[0]
+            return queryResult[0][0]
         } catch (error:any) {
             throw new Error("Erro ao buscar usuário por ID!")
         }
-    } 
+    }
 
-    // //Query para procurar usuário por "cpf"
-    // getByCpf = async (cpf: string) => {
-    //     try {
-    //         const queryResult = await BaseDatabase
-    //         .connection(this.TABLE_NAME)
-    //         .select()
-    //         .where("cpf", cpf)
+    //Query para procurar pedido por "id"
+    getOrderById = async (id: string) => {
+        try {
+            const queryResult = await BaseDatabase
+            .connection(this.TABLE_NAME)
+            .select()
+            .where("id", id)
             
-    //         console.log(queryResult)
-    //         return queryResult[0]
-    //     } catch (error:any) {
-    //         throw new Error("Erro ao buscar cpf no banco de dados!")
-    //     }
-    // }
+            return queryResult[0]
+        } catch (error:any) {
+            throw new Error("Erro ao buscar pedido no banco de dados!")
+        }
+    }
 
     // //Query para procurar usuário por "email"
     // getByEmail = async (email: string) => {
@@ -78,18 +76,18 @@ export default class OrderData extends BaseDatabase implements OrderRepository {
     //     }
     // } 
 
-    // //Query para retornar todos os usuários
-    // getAllUsers = async () => {
-    //     try {
-    //         const queryResult = await BaseDatabase
-    //         .connection(this.TABLE_NAME)
-    //         .select()
+    // //Query para retornar todos os pedidos
+    getAllOrders = async () => {
+        try {
+            const queryResult = await BaseDatabase
+            .connection(this.TABLE_NAME)
+            .select()
             
-    //         return queryResult
-    //     } catch (error:any) {
-    //         throw new Error("Erro ao buscar os usuários!")
-    //     }
-    // }
+            return queryResult
+        } catch (error:any) {
+            throw new Error("Erro ao buscar os pedidos!")
+        }
+    }
 
     // //Query para atualizar nome, email e telefone de usuário
     // updateUserByNameTelephone = async (id:string, name:string, telephone: string, updatedAt: string) => {

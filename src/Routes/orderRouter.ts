@@ -10,3 +10,4 @@ const orderController = new OrderController();
 
 //endpoints
 orderRouter.post("/create", orderController.createOrder)
+orderRouter.get("/", orderController.getOrders)

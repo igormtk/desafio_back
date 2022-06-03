@@ -82,16 +82,17 @@ export default class UserBusiness {
         if(!inputParams){
             const result = await this.userData.getAllUsers()
             return result
-        } else {
-            //Caso um params seja colocado, retornar o usuário em questão
-            const result = await this.userData.getById(inputParams)
+        } 
+        
+        //Caso um params seja colocado, retornar o usuário em questão
+        const result = await this.userData.getById(inputParams)
 
-            if(!result){
-                throw new Error("Não existe um usuário com esse id")
-            }
-
-            return result
+        if(!result){
+            throw new Error("Não existe um usuário com esse id")
         }
+
+        return result
+        
     }
 
     //Lógica para a atualização de 1 usuário
