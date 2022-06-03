@@ -120,11 +120,14 @@ export default class UserBusiness {
             throw new Error("Esse usuário não existe!")
         }
 
+        //Criptografa telefone após recebimento
+        const cryptedTelephone = await this.crypto.crypt(telephone)
+
         //Nova data de atualização
         const updatedAt = new Date().toString()
 
         //Atualização do nome, telefone e data de atualização no banco de dados
-        await this.userData.updateUserByNameTelephone(id, name, telephone, updatedAt)
+        await this.userData.updateUserByNameTelephone(id, name, cryptedTelephone, updatedAt)
     }
 
     //Lógica para a deletar um usuário através de Id
