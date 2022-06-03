@@ -1,6 +1,6 @@
 # DESAFIO BACK-END
 
-Neste desafio foi criado uma aplicação básica nos moldes de um microserviço.
+Neste desafio foi criado uma aplicação básica nos moldes de um micro serviço.
 
 Ela apresenta as seguintes funcionalidades para as entidades usuários e pedidos:
 
@@ -48,35 +48,31 @@ Uma tabela de pedidos que deverá conter os campos:
 ## Usuários:
 
 #### Criar Usuário
-- Pode-se criar um funcionário a partir do recebimento das seguintes informações: nome, cpf, email, telefone.
+- Pode-se criar um usuário a partir do recebimento das seguintes informações pelo body: nome, cpf, email, telefone.
 
 #### Pegar Usuário
-- Pode-se pegar as informações de um usuário através de um "id", ou simplesmente retorna todos os usuários se o "id" do usuário não for passado.
+- Pode-se pegar as informações de um usuário através de um "id" passado pelo body, ou simplesmente retorna todos os usuários se o "id" do usuário estiver vazio.
 
 #### Atualizar Usuário
-- Pode-se atualizar um usuário através de um id, nome e telefone, onde você deve passar as 3 informações para serem atualizadas. Caso você queira atualizar apenas uma, deve-se repetir a informação que estava salva (não é possível atualizar o id).
+- Pode-se atualizar um usuário através de um id, nome e telefone, onde você deve passar as 3 informações pelo body para serem atualizadas. Caso você queira atualizar apenas uma, deve-se repetir a informação que estava salva (não é possível atualizar o id).
 
 #### Deletar Usuário
-- É possível deletar um usuário passando uma id.
+- É possível deletar um usuário passando um id pelo body.
 
 ## Pedidos:
 
 #### Criar Pedido
-- Pode-se criar um um pedido a partir do recebimento das seguintes informações: id de um usuário cadastrado, descricao, quantidade, preco.
+- Pode-se criar um pedido a partir do recebimento das seguintes informações: id de um usuário cadastrado, descricao, quantidade, preco pelo body.
 
 #### Pegar Pedido
-- Pode-se pegar as informações de um pedido através de um "id", ou simplesmente retorna todos os pedidos se o "id" do pedido não for passado.
+- Pode-se pegar as informações de um pedido através de um "id" passado pelo body, ou simplesmente retorna todos os pedidos se o "id" for passado vazio.
 
 #### Atualizar Pedido
-- Pode-se atualizar um usuário através de um id de usuário, descrição, quantidade e preço, onde você deve passar todas essas informações para serem atualizadas. Caso você queira atualizar apenas uma, deve-se repetir as informações que estavam salvas (não é possível atualizar o id).
+- Pode-se atualizar um usuário através de um id de usuário, descrição, quantidade, onde você deve passar todas essas informações pelo body para serem atualizadas. Caso você queira atualizar apenas uma, deve-se repetir as informações que estavam salvas (não é possível atualizar o id).
 
 #### Deletar Pedido
-- É possível deletar um pedido passando uma id.
+- É possível deletar um pedido passando um id pelo body.
 
-<!-- ## Testes para os 100m:
-
-
-## Testes para o arremesso de dardo: -->
 
 
 ## Como usar
@@ -84,7 +80,7 @@ Uma tabela de pedidos que deverá conter os campos:
 Teste o código pelo postman seguindo a documentação:
 
 - Documentação API:
-Acesse o postman aqui 👉 https://documenter.getpostman.com/view/18386394/Uyr4L1JG
+Acesse o postman aqui 👉 https://documenter.getpostman.com/view/18386394/Uz5GobJo
 
 ou pelo seu computador assim: 
 - Clone o código para seu computador. 
@@ -111,9 +107,12 @@ Dentro da pasta clonada, execute no terminal os comandos:
 
 -> npm run dev ou npm run start (para rodar o servidor e utilizar os endpoints).
 
-Utilize o postman trocando o link pelo seu localhost mantendo os endpoints, seguindo documentação do postman AQUI.
+Utilize o postman trocando o link pelo seu localhost mantendo os endpoints, seguindo documentação do postman.
+
+- DEPLOY no HEROKU: https://desafio-back-igor.herokuapp.com
 
 Exemplo:
-de: 
+
+de: https://desafio-back-igor.herokuapp.com/
 
 para: http://localhost:3003/
