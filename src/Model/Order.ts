@@ -73,8 +73,10 @@ export type CreateOrderInputDTO = {
 }
 
 export type UpdateOrderInputDTO = {
+    id: string
     user_id: string, 
     description: string,
     quantity: number, 
-    price: number
+    price: number,
+    updated_at: string
 }

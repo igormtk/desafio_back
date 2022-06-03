@@ -1,4 +1,4 @@
-import { CreateOrderInputDTO, Order } from "../../Model/Order";
+import { CreateOrderInputDTO, Order, UpdateOrderInputDTO } from "../../Model/Order";
 import { HashManager } from "../../Services/HashManager";
 import { IdGenerator } from "../../Services/IdGenerator";
 import { OrderRepository } from "./OrderRepository";
@@ -85,32 +85,30 @@ export default class OrderBusiness {
         return result
     }
 
-    // //Lógica para a atualização de 1 usuário
+    // //Lógica para a atualização de 1 pedido
     // //Inserindo um type para restringir as infos que o usuário deve inserir
-    // updateUser = async(input: UpdateUserInputDTO) => {
-    //     //Informações a serem recebidas da camada controller
-    //     //Não coloquei cpf e email porque o cpf não pode ser mudado 
-    //     //e dificilmente um usuário pode mudar seu e-mail
-    //     const {id, name, telephone}  = input
+    updateOrder = async(input: UpdateOrderInputDTO) => {
+        //Informações a serem recebidas da camada controller
+        const {id, user_id, description, quantity, price}  = input
 
-    //     //ID é obrigatório para encontrar usuário
-    //     if(!id || !name || !telephone){
-    //         throw new Error("Você deve informar todas as informações para atualizar um usuário!")
-    //     }
+        //ID é obrigatório para encontrar usuário
+        if(!id || !user_id || !description || !quantity || !price){
+            throw new Error("Você deve informar todas as informações para atualizar um usuário!")
+        }
         
-    //     //Verificar se existe um usuário com o id que foi passado
-    //     const verificaUser = await this.userData.getById(id)
+        //Verificar se existe um pedido com o id que foi passado
+        const verificaOrder = await this.orderData.getOrderById(id)
 
-    //     if(!verificaUser){
-    //         throw new Error("Esse usuário não existe!")
-    //     }
+        if(!verificaOrder){
+            throw new Error("Esse pedido não existe!")
+        }
 
-    //     //Nova data de atualização
-    //     const updatedAt = new Date().toString()
+        //Nova data de atualização
+        const updatedAt = new Date().toString()
 
-    //     //Atualização do nome, telefone e data de atualização no banco de dados
-    //     await this.userData.updateUserByNameTelephone(id, name, telephone, updatedAt)
-    // }
+        //Atualização do nome, telefone e data de atualização no banco de dados
+        await this.orderData.updateOrderByUserIdDescriptionQuantityPrice(id, user_id, description, quantity, price, updatedAt)
+    }
 
     // //Lógica para a deletar um usuário através de Id
     // deleteUser = async(input: string) => {

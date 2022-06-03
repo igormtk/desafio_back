@@ -1,7 +1,7 @@
 import { Response, Request } from "express";
 import OrderBusiness from "../../Business/Order/OrderBusiness";
 import OrderData from "../../Data/Order/OrderData";
-import { CreateOrderInputDTO } from "../../Model/Order";
+import { CreateOrderInputDTO, UpdateOrderInputDTO } from "../../Model/Order";
 
 
 //Camada Controller para receber as requisições e devolver as respostas, conversando com a business
@@ -59,23 +59,24 @@ export default class OrderController {
         }
     }
 
-    // updateUser = async (req: Request, res: Response) => {
-    //     //Recebimento das informações necessárias para atualizar usuário
-    //     const input = req.body
+    //Recebimento das requisições para atualizar um pedido
+    updateOrder = async (req: Request, res: Response) => {
+        //Recebimento das informações necessárias para atualizar usuário
+        const input = req.body
 
-    //     //Em caso de informações corretas:
-    //     try {
-    //         //Executar a lógica do getUsers na camada Business
-    //         await this.userBusiness.updateUser(input)
-    //         res.send({message: "Usuário atualizado com sucesso!"})
+        //Em caso de informações corretas:
+        try {
+            //Executar a lógica do getUsers na camada Business
+            await this.orderBusiness.updateOrder(input)
+            res.send({message: "Pedido atualizado com sucesso!"})
         
-    //     //Em caso de informações incorretas:
-    //     } catch (error:any) {
-    //         res.statusCode = 400
-    //         let message = error.sqlMessage || error.message
-    //         res.send({ message })
-    //     }
-    // }
+        //Em caso de informações incorretas:
+        } catch (error:any) {
+            res.statusCode = 400
+            let message = error.sqlMessage || error.message
+            res.send({ message })
+        }
+    }
 
     // deleteUser = async (req: Request, res: Response) => {
     //     //Recebimento do id para deletar apenas 1 usuário

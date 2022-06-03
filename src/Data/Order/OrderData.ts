@@ -48,34 +48,6 @@ export default class OrderData extends BaseDatabase implements OrderRepository {
         }
     }
 
-    // //Query para procurar usuário por "email"
-    // getByEmail = async (email: string) => {
-    //     try {
-    //         const queryResult = await BaseDatabase
-    //         .connection(this.TABLE_NAME)
-    //         .select()
-    //         .where("email", email)
-         
-    //         return queryResult[0]
-    //     } catch (error:any) {
-    //         throw new Error("Erro ao buscar e-mail no banco de dados!")
-    //     }
-    // }
-
-    // //Query para procurar usuário por "telephone"
-    // getByTelephone = async (telephone: string) => {
-    //     try {
-    //         const queryResult = await BaseDatabase
-    //         .connection(this.TABLE_NAME)
-    //         .select()
-    //         .where("telephone", telephone)
-            
-    //         return queryResult[0]
-    //     } catch (error:any) {
-    //         throw new Error("Erro ao buscar telefone no banco de dados!")
-    //     }
-    // } 
-
     // //Query para retornar todos os pedidos
     getAllOrders = async () => {
         try {
@@ -89,20 +61,29 @@ export default class OrderData extends BaseDatabase implements OrderRepository {
         }
     }
 
-    // //Query para atualizar nome, email e telefone de usuário
-    // updateUserByNameTelephone = async (id:string, name:string, telephone: string, updatedAt: string) => {
-    //     try {
-    //         const queryResult = await BaseDatabase.connection.raw(`
-    //             UPDATE ${this.TABLE_NAME}
-    //             SET name = '${name}', telephone = '${telephone}', updated_at = '${updatedAt}'
-    //             WHERE id = '${id}'
-    //         `)
+    //Query para atualizar user_id, description, quantity, price, updatedAt
+    updateOrderByUserIdDescriptionQuantityPrice = async (
+        id: string,
+        user_id: string, 
+        description: string,
+        quantity: number, 
+        price: number,
+        updatedAt: string
+    ) => {
+
+        try {
+            const queryResult = await BaseDatabase.connection.raw(`
+                UPDATE ${this.TABLE_NAME}
+                SET user_id = '${user_id}', description = '${description}', quantity = '${quantity}', 
+                price = '${price}', updated_at = '${updatedAt}'
+                WHERE id = '${id}'
+            `)
             
-    //         return queryResult[0]
-    //     } catch (error:any) {
-    //         throw new Error("Erro ao atualizar por nome e sobrenome!")
-    //     }
-    // }
+            return queryResult[0]
+        } catch (error:any) {
+            throw new Error("Erro ao atualizar as informações!")
+        }
+    }
 
     // //Query para deletar usuário
     // deleteById = async (id: string ) => {
