@@ -73,7 +73,11 @@ Uma tabela de pedidos que deverá conter os campos:
 #### Deletar Pedido
 - É possível deletar um pedido passando um id pelo body.
 
+### Testes:
 
+Foram realizados 2 testes como demonstração para os usuários:
+- Erro ao passar algum input vazio na hora de cadastrar o usuário;
+- Erro ao passar um id inexistente para pegar um usuário específico;
 
 ## Como usar
 
