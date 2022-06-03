@@ -18,18 +18,28 @@ export default class OrderBusiness {
     }
 
     //Lógica para a criação de um usuário
-    createUser = async(input: CreateOrderInputDTO) => {
+    createOrder = async(input: CreateOrderInputDTO) => {
         //Informações a serem recebidas da camada controller
-        const {user_id, description,quantity, price, value} = input
-
+        const {user_id, description, quantity, price} = input
+        
         //Verificação das informações recebidas
         //Para simplificar o projeto não formatarei o telefone nem o email, porém existe a necessidade
-        if(!user_id || !description || !quantity || !price || !value){
+        if(!user_id || !description || !quantity || !price){
             throw new Error("Um dos campos não foi preenchido!")
+        }
+
+        //verificar se existe usuário com o id passado
+        const verifyUser = await this.orderData.getById(user_id)
+
+        if(!verifyUser){
+            throw new Error("Esse usuário não existe!")
         }
 
         //Criando id com Id Generator
         const id = this.idGenerator.generate()
+
+        //Calculando valor
+        const value = quantity * price
 
         //Pegando data e horário, para simplificar esse processo usarei new Date()
         const created_at = new Date().toString()

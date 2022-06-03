@@ -1,6 +1,7 @@
 import { Response, Request } from "express";
 import OrderBusiness from "../../Business/Order/OrderBusiness";
 import OrderData from "../../Data/Order/OrderData";
+import { CreateOrderInputDTO } from "../../Model/Order";
 
 
 //Camada Controller para receber as requisições e devolver as respostas, conversando com a business
@@ -14,21 +15,21 @@ export default class OrderController {
     //Recebimento das requisições para a criação de um usuário
     createOrder = async (req: Request, res: Response) => {
         //Recebimento das informações
-        const {name, cpf, email, telephone} = req.body
+        const {user_id, description, quantity, price} = req.body
 
         //Transformando em um input e inserindo um type para restringir as infos que o usuário deve inserir
-        const input: CreateUserInputDTO = {
-            name,
-            cpf,
-            email,
-            telephone
+        const input: CreateOrderInputDTO = {
+            user_id, 
+            description,
+            quantity, 
+            price 
         }
         
         //Em caso de informações corretas:
         try {
             //Executar a lógica do createUser na camada Business
-            await this.userBusiness.createUser(input)
-            res.send({message: "Usuário criado com sucesso!"})
+            await this.orderBusiness.createOrder(input)
+            res.send({message: "Pedido criado com sucesso!"})
         
         //Em caso de informações incorretas:
         } catch (error:any) {

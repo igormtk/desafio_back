@@ -61,7 +61,7 @@ export default class UserData extends BaseDatabase implements UserRepository {
         }
     } 
 
-    //Query para procurar usuário por "telephone"
+    //Query para procurar usuário por "id"
     getById = async (id: string) => {
         try {
             const queryResult = await BaseDatabase

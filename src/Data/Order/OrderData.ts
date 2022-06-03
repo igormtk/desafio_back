@@ -6,7 +6,7 @@ import BaseDatabase from "../BaseDatabase"
 export default class OrderData extends BaseDatabase implements OrderRepository {
     protected TABLE_NAME = "UserOrder"
 
-    //Query para inserir usuário no banco de dados
+    //Query para inserir ordem no banco de dados
     insertOrder = async (order: Order) => {
         try {
             await BaseDatabase
@@ -15,9 +15,25 @@ export default class OrderData extends BaseDatabase implements OrderRepository {
             
             return order
         } catch (error:any) {
-            throw new Error("Erro ao criar usuário no banco de dados!")
+            throw new Error("Erro ao criar pedido no banco de dados!")
         }
     }
+
+    //Query para procurar usuário por "id"
+    getById = async (id: string) => {
+        try {
+            const queryResult = await BaseDatabase.connection.raw(`
+            SELECT Users.id, Users.name, Users.cpf, Users.email, Users.telephone, Users.created_at, Users.updated_at 
+            FROM ${this.TABLE_NAME} 
+            RIGHT JOIN Users on ${this.TABLE_NAME}.user_id = Users.id 
+            WHERE Users.id = '${id}';
+            `)
+            
+            return queryResult[0]
+        } catch (error:any) {
+            throw new Error("Erro ao buscar usuário por ID!")
+        }
+    } 
 
     // //Query para procurar usuário por "cpf"
     // getByCpf = async (cpf: string) => {
@@ -59,20 +75,6 @@ export default class OrderData extends BaseDatabase implements OrderRepository {
     //         return queryResult[0]
     //     } catch (error:any) {
     //         throw new Error("Erro ao buscar telefone no banco de dados!")
-    //     }
-    // } 
-
-    // //Query para procurar usuário por "telephone"
-    // getById = async (id: string) => {
-    //     try {
-    //         const queryResult = await BaseDatabase
-    //         .connection(this.TABLE_NAME)
-    //         .select()
-    //         .where({id})
-            
-    //         return queryResult[0]
-    //     } catch (error:any) {
-    //         throw new Error("Erro ao buscar usuário por ID!")
     //     }
     // } 
 
