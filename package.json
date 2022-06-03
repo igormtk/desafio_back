@@ -7,7 +7,8 @@
     "dev": "ts-node-dev ./src/index.ts",
     "start": "tsc && node ./build/index.js",
     "test": "clear && echo \"Running tests...\" && jest --runInBand --detectOpenHandles --forceExit",
-    "migrations": "tsnd src/migrations.ts"
+    "migrations": "tsnd src/migrations.ts",
+    "tsc": "tsc"
   },
   "repository": {
     "type": "git",
